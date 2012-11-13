@@ -1,3 +1,3 @@
 public class Bidon {
-	private String lol;
+	private String lol2;
 }
