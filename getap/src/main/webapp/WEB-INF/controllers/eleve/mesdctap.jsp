@@ -42,7 +42,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${CREER_ELEVE  or  MODIFIEE_ELEVE}">
+						<c:if test="${CREER_ELEVE || MODIFIEE_ELEVE}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -85,7 +85,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${MODIFIEE_ELEVE}">
+						<c:if test="${MODIFIEE_PROF}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<c:if test="${dctap.dateModifiee}">
@@ -231,18 +231,18 @@
 	</div>
 		<c:forEach items="${mesdctaps}" var="dctap">
 		<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-		<c:if test="${ACCPETER_ELEVE_MOD_PROF or VALIDER_PROF }">
+		<c:if test="${ACCPETER_ELEVE_MOD_PROF || VALIDER_PROF}">
 			<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
-		<c:if test="${REJETEE_ELEVE_MOD_PROF or REJETEE_PROF or REJETEE_ELEVE}">
+		<c:if test="${REJETEE_ELEVE_MOD_PROF || REJETEE_PROF || REJETEE_ELEVE}">
 			<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
 		<c:if
-			test="${CREER_ELEVE or MODIFIEE_ELEVE or MODIFIEE_PROF }">
+			test="${CREER_ELEVE || MODIFIEE_ELEVE || MODIFIEE_PROF}">
 			<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
