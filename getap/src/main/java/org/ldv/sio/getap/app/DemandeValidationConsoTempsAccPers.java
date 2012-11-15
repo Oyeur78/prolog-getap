@@ -14,7 +14,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 	private static final int CREER_ELEVE = 0;
 	private static final int ACCEPTER_ELEVE_MOD_PROF = 1;
-	private static final int REJETE_ELEVE_MOD_PROF = 2;
+	private static final int REJETEE_ELEVE_MOD_PROF = 2;
 	private static final int MODIFIEE_ELEVE = 4;
 	private static final int REJETEE_ELEVE = 8;
 	private static final int VALIDER_PROF = 32;
@@ -189,6 +189,13 @@ public class DemandeValidationConsoTempsAccPers {
 		this.etat = etat;
 	}
 
+	public boolean isEtatInitial() {
+		if (etat == CREER_ELEVE) {
+			return true;
+		}
+		return false;
+	}
+
 	public boolean isCreeEleve() {
 		return (this.etat & CREER_ELEVE) != 0;
 	}
@@ -197,23 +204,23 @@ public class DemandeValidationConsoTempsAccPers {
 		return (this.etat & ACCEPTER_ELEVE_MOD_PROF) != 0;
 	}
 
-	public boolean isEtatRejeterEleveApresModif() {
-		return (this.etat & REJETE_ELEVE_MOD_PROF) != 0;
+	public boolean isRejeterEleveApresModif() {
+		return (this.etat & REJETEE_ELEVE_MOD_PROF) != 0;
 	}
 
-	public boolean isEtatModifierEleve() {
+	public boolean isModifierEleve() {
 		return (this.etat & MODIFIEE_ELEVE) != 0;
 	}
 
-	public boolean isEtatRejeteeEleve() {
+	public boolean isRejeteeEleve() {
 		return (this.etat & REJETEE_ELEVE) != 0;
 	}
 
-	public boolean isEtatValiderProf() {
+	public boolean isValiderProf() {
 		return (this.etat & VALIDER_PROF) != 0;
 	}
 
-	public boolean isEtatRefuserProf() {
+	public boolean isRefuserProf() {
 		return (this.etat & REJETEE_PROF) != 0;
 	}
 
@@ -267,6 +274,122 @@ public class DemandeValidationConsoTempsAccPers {
 
 	public void setDctapAccModif() {
 		this.etat = this.getEtat() + 4096;
+	}
+
+	public void accepteeParEleve() throws DVCTAPException {
+		if (!this.isValiderProf()
+				&& !this.isRefuserProf()
+				&& !this.isRejeterEleveApresModif()
+				&& !this.isRejeteeEleve()
+				&& !this.isValiderProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& (this.isApModifiee() || this.isDateModifiee() || this
+						.isDureeModifiee())) {
+			this.etat = this.etat | ACCEPTER_ELEVE_MOD_PROF;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être accepté par l'élève !");
+		}
+	}
+
+	public void rejeteParEleveApresModProf() throws DVCTAPException {
+		if (!this.isValiderProf()
+				&& !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeteeEleve()
+				&& !this.isValiderProf()
+				&& !this.isRejeterEleveApresModif()
+				&& (this.isApModifiee() || this.isDateModifiee() || this
+						.isDureeModifiee())) {
+			this.etat = this.etat | REJETEE_ELEVE_MOD_PROF;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être rejeté par l'élève !");
+		}
+	}
+
+	public void modifieeParEleve() throws DVCTAPException {
+		if (!this.isValiderProf() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isApModifiee()
+				&& !this.isDureeModifiee() && !this.isDateModifiee()
+				&& !this.isRejeteeEleve()) {
+			this.etat = this.etat | MODIFIEE_ELEVE;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être modifier par l'élève !");
+		}
+	}
+
+	public void rejeteeParEleve() throws DVCTAPException {
+		if (!this.isValiderProf() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isApModifiee()
+				&& !this.isDureeModifiee() && !this.isDateModifiee()
+				&& !this.isRejeteeEleve()) {
+			this.etat = this.etat | REJETEE_ELEVE;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peut être annuler par l'élève !");
+		}
+	}
+
+	public void valideeParLeProfesseur() throws DVCTAPException {
+		if (!this.isRejeteeEleve() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isValiderProf()) {
+			this.etat = this.etat | VALIDER_PROF;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être valider par le professeur !");
+		}
+	}
+
+	public void rejeteeParLeProfesseur() throws DVCTAPException {
+		if (!this.isRejeteeEleve() && !this.isValiderProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isRefuserProf()) {
+			this.etat = this.etat | REJETEE_PROF;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être refusé par le professeur !");
+		}
+	}
+
+	public void dureeModifieeParLeProfesseur() throws DVCTAPException {
+		if (!this.isValiderProf() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
+				&& !this.isRefuserProf()) {
+			this.etat = this.etat | DUREE_MODIFIEE;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être modifié par le professeur !");
+		}
+	}
+
+	public void dateModifieeParLeProfesseur() throws DVCTAPException {
+		if (!this.isValiderProf() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
+				&& !this.isRefuserProf()) {
+			this.etat = this.etat | DATE_MODIFIEE;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être modifié par le professeur !");
+		}
+	}
+
+	public void modifieeParLeProfesseur() throws DVCTAPException {
+		if (!this.isValiderProf() && !this.isRefuserProf()
+				&& !this.isAccepterParEleveApresModif()
+				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
+				&& !this.isRefuserProf()) {
+			this.etat = this.etat | AP_MODIFIEE;
+		} else {
+			throw new DVCTAPException(
+					"La demande ne peux être modifié par le professeur !");
+		}
 	}
 
 	@Override
