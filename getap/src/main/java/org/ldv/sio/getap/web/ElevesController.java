@@ -51,12 +51,15 @@ public class ElevesController {
 		model.addAttribute("ACCPETER_ELEVE_MOD_PROF",
 				manager.getAllDVCTAPByEtat(1, id));
 		model.addAttribute("REJETEE_ELEVE_MOD_PROF",
-				manager.getAllDVCTAPByEtat(2, id));
-		model.addAttribute("MODIFIEE_ELEVE", manager.getAllDVCTAPByEtat(4, id));
+				manager.getAllDVCTAPByEtat(2, id) == 2);
+		model.addAttribute("MODIFIEE_ELEVE",
+				manager.getAllDVCTAPByEtat(4, id) == 4);
 		model.addAttribute("REJETEE_ELEVE", manager.getAllDVCTAPByEtat(8, id));
 		model.addAttribute("VALIDER_PROF", manager.getAllDVCTAPByEtat(32, id));
-		model.addAttribute("REJETEE_PROF", manager.getAllDVCTAPByEtat(64, id));
-		model.addAttribute("MODIFIEE_PROF", manager.getAllDVCTAPModifByEtat(id));
+		model.addAttribute("REJETEE_PROF",
+				manager.getAllDVCTAPByEtat(64, id) == 64);
+		model.addAttribute("MODIFIEE_PROF",
+				manager.getAllDVCTAPModifByEtat(id) == 1);
 
 		return "eleve/mesdctap";
 	}
