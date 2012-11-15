@@ -193,6 +193,30 @@ public class DemandeValidationConsoTempsAccPers {
 		return (this.etat & CREER_ELEVE) != 0;
 	}
 
+	public boolean isAccepterParEleveApresModif() {
+		return (this.etat & ACCEPTER_ELEVE_MOD_PROF) != 0;
+	}
+
+	public boolean isEtatRejeterEleveApresModif() {
+		return (this.etat & REJETE_ELEVE_MOD_PROF) != 0;
+	}
+
+	public boolean isEtatModifierEleve() {
+		return (this.etat & MODIFIEE_ELEVE) != 0;
+	}
+
+	public boolean isEtatRejeteeEleve() {
+		return (this.etat & REJETEE_ELEVE) != 0;
+	}
+
+	public boolean isEtatValiderProf() {
+		return (this.etat & VALIDER_PROF) != 0;
+	}
+
+	public boolean isEtatRefuserProf() {
+		return (this.etat & REJETEE_PROF) != 0;
+	}
+
 	public boolean isDateModifiee() {
 		return (this.etat & DATE_MODIFIEE) != 0;
 	}
