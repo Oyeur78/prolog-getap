@@ -9,6 +9,16 @@ import java.sql.Date;
  */
 
 public class DemandeValidationConsoTempsAccPers {
+	/**
+	 * Les etats
+	 */
+	private static final int CREER_ELEVE = 0;
+	private static final int ACCEPTER_ELEVE_MOD_PROF = 1;
+	private static final int REJETE_ELEVE_MOD_PROF = 2;
+	private static final int MODIFIEE_ELEVE = 4;
+	private static final int REJETEE_ELEVE = 8;
+	private static final int VALIDER_PROF = 32;
+	private static final int REJETEE_PROF = 64;
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
@@ -80,6 +90,16 @@ public class DemandeValidationConsoTempsAccPers {
 		this.accPers = accPers;
 		this.eleve = eleve;
 		this.etat = etat;
+	}
+
+	/**
+	 * Constructeur permettant de créer une demande complète avec un état
+	 * intialiser à 0.
+	 */
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
+			Date date, Integer minutes, User prof, AccPersonalise accPers,
+			User eleve) {
+		this(id, anneeScolaire, date, minutes, prof, accPers, eleve, 0);
 	}
 
 	public Long getId() {
@@ -167,6 +187,10 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 	public void setEtat(int etat) {
 		this.etat = etat;
+	}
+
+	public boolean isCreeEleve() {
+		return (this.etat & CREER_ELEVE) != 0;
 	}
 
 	public boolean isDateModifiee() {
