@@ -288,7 +288,6 @@ public class AdminController {
 			manager.deleteDiscipline(dis);
 		}
 		return "redirect:/app/admin/logiciel";
-
 	}
 
 	@RequestMapping(value = "ajoutClasse", method = RequestMethod.GET)

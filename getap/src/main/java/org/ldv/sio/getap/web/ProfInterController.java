@@ -74,7 +74,6 @@ public class ProfInterController {
 		model.addAttribute("REJETEE_ELEVE_MOD_PROF",
 				manager.getAllDVCTAPByEtat(2, id));
 		model.addAttribute("MODIFIEE_ELEVE", manager.getAllDVCTAPByEtat(4, id));
-
 		model.addAttribute("REJETEE_ELEVE", manager.getAllDVCTAPByEtat(16, id));
 		model.addAttribute("VALIDER_PROF", manager.getAllDVCTAPByEtat(32, id));
 		model.addAttribute("REJETEE_PROF", manager.getAllDVCTAPByEtat(64, id));
@@ -168,7 +167,6 @@ public class ProfInterController {
 				this.refuseDCTAPById(listId.getIds()[i], model);
 			}
 		}
-
 		return "redirect:/app/prof-intervenant/index";
 	}
 }

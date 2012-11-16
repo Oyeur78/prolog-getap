@@ -94,5 +94,4 @@ public class ProfPrinController {
 		}
 		return "redirect:/app/prof-principal/index";
 	}
-
 }
