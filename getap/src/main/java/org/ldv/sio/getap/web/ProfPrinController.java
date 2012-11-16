@@ -73,21 +73,21 @@ public class ProfPrinController {
 				Long idUser = user.getId();
 				model.addAttribute("sesDCTAPeleve",
 						manager.getAllDVCTAPByEleve(user));
-				model.addAttribute("etat0",
+				model.addAttribute("CREER_ELEVE",
 						manager.getAllDVCTAPByEtat(0, idUser));
-				model.addAttribute("etat1",
+				model.addAttribute("ACCPETER_ELEVE_MOD_PROF",
 						manager.getAllDVCTAPByEtat(1, idUser));
-				model.addAttribute("etat2",
+				model.addAttribute("REJETEE_ELEVE_MOD_PROF",
 						manager.getAllDVCTAPByEtat(2, idUser));
-				model.addAttribute("etat4",
+				model.addAttribute("MODIFIEE_ELEVE",
 						manager.getAllDVCTAPByEtat(4, idUser));
-				model.addAttribute("etat8",
+				model.addAttribute("REJETEE_ELEVE",
 						manager.getAllDVCTAPByEtat(8, idUser));
-				model.addAttribute("etat32",
+				model.addAttribute("VALIDER_PROF",
 						manager.getAllDVCTAPByEtat(32, idUser));
-				model.addAttribute("etat64",
+				model.addAttribute("REJETEE_PROF",
 						manager.getAllDVCTAPByEtat(64, idUser));
-				model.addAttribute("etatsup1000",
+				model.addAttribute("MODIFIEE_PROF",
 						manager.getAllDVCTAPModifByEtat(idUser));
 				return "prof-principal/detailUser";
 			}
