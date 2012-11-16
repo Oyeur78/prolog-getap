@@ -34,7 +34,7 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.creeEleve || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
+					<c:if test="${dctap.etatInitial || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
 					<c:if test="${dctap.accepterParEleveApresModif || dctap.validerProf }">
@@ -54,7 +54,7 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.creeEleve || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
+					<c:if test="${dctap.etatInitial || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
 					<c:if test="${dctap.accepterParEleveApresModif || dctap.validerProf  }">

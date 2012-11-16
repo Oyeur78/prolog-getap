@@ -117,7 +117,7 @@ public class ElevesController {
 			User user = UtilSession.getUserInSession();
 			DemandeValidationConsoTempsAccPers dctapForUpdate = manager
 					.getDVCTAPById(Long.valueOf(formDctap.getId()));
-			if (dctapForUpdate.isCreeEleve()
+			if (dctapForUpdate.isEtatInitial()
 					|| dctapForUpdate.isModifierEleve()) {
 
 				AccPersonalise acc = new AccPersonalise(null,

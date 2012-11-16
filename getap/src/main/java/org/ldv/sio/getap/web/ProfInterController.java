@@ -128,7 +128,7 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.isCreeEleve() || dctap.isModifierEleve()
+				&& (dctap.isEtatInitial() || dctap.isModifierEleve()
 						|| dctap.isDateModifiee() || dctap.isDureeModifiee() || dctap
 							.isApModifiee())) {
 			dctap.setDctapRefuse();
@@ -145,7 +145,7 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.isCreeEleve() || dctap.isModifierEleve())) {
+				&& (dctap.isEtatInitial() || dctap.isModifierEleve())) {
 			dctap.setDctapValide();
 			manager.updateDVCTAP(dctap);
 		}

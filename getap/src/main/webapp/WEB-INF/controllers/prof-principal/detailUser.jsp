@@ -25,7 +25,7 @@
 		<tbody>
 			<c:forEach items="${sesDCTAPeleve}" var="dctap">
 				<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-				<c:if test="${dctap.creeEleve || dctap.refuserProf}">
+				<c:if test="${dctap.etatInitial || dctap.refuserProf}">
 					<tr>
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
@@ -104,7 +104,7 @@
 		<tbody>
 			<c:forEach items="${sesDCTAPeleve}" var="dctap">
 				<c:if
-					test="${dctap.creeEleve || dctap.rejeteeEleve || dctap.dateModifiee || dctap.dureeModifiee || dctap.apModifiee}">
+					test="${dctap.etatInitial || dctap.rejeteeEleve || dctap.dateModifiee || dctap.dureeModifiee || dctap.apModifiee}">
 					<tr>
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>

@@ -42,7 +42,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${dctap.creeEleve || dctap.modifierEleve}">
+						<c:if test="${dctap.etatInitial || dctap.modifierEleve}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -242,7 +242,7 @@
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
 		<c:if
-			test="${dctap.creeEleve || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
+			test="${dctap.etatInitial || dctap.modifierEleve || dctap.dureeModifiee || dctap.dateModifiee || dctap.apModifiee}">
 			<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 		</c:if>
 	</c:forEach>

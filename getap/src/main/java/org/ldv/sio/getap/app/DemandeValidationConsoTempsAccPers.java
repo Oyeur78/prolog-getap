@@ -196,10 +196,6 @@ public class DemandeValidationConsoTempsAccPers {
 		return false;
 	}
 
-	public boolean isCreeEleve() {
-		return (this.etat & CREER_ELEVE) != 0;
-	}
-
 	public boolean isAccepterParEleveApresModif() {
 		return (this.etat & ACCEPTER_ELEVE_MOD_PROF) != 0;
 	}
