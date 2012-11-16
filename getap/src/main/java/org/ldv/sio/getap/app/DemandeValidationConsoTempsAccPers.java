@@ -2,6 +2,9 @@ package org.ldv.sio.getap.app;
 
 import java.sql.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Demande de validation d'un temps d'accompagnement personnalisé
  * 
@@ -61,6 +64,9 @@ public class DemandeValidationConsoTempsAccPers {
 	/**
 	 * constructeur par défaut
 	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(DemandeValidationConsoTempsAccPers.class);
+
 	public DemandeValidationConsoTempsAccPers() {
 
 	}
@@ -282,6 +288,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& (this.isApModifiee() || this.isDateModifiee() || this
 						.isDureeModifiee())) {
 			this.etat = this.etat | ACCEPTER_ELEVE_MOD_PROF;
+			logger.info("Accepté par l'élève: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être accepté par l'élève !");
@@ -298,6 +305,8 @@ public class DemandeValidationConsoTempsAccPers {
 				&& (this.isApModifiee() || this.isDateModifiee() || this
 						.isDureeModifiee())) {
 			this.etat = this.etat | REJETEE_ELEVE_MOD_PROF;
+			logger.info("Rejeté par l'élève après modification: "
+					+ this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être rejeté par l'élève !");
@@ -311,6 +320,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isDureeModifiee() && !this.isDateModifiee()
 				&& !this.isRejeteeEleve()) {
 			this.etat = this.etat | MODIFIEE_ELEVE;
+			logger.info("Modifié par l'élève " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être modifier par l'élève !");
@@ -324,6 +334,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isDureeModifiee() && !this.isDateModifiee()
 				&& !this.isRejeteeEleve()) {
 			this.etat = this.etat | REJETEE_ELEVE;
+			logger.info("Annuler par l'élève: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peut être annuler par l'élève !");
@@ -335,6 +346,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isAccepterParEleveApresModif()
 				&& !this.isRejeterEleveApresModif() && !this.isValiderProf()) {
 			this.etat = this.etat | VALIDER_PROF;
+			logger.info("Validé par le professeur: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être valider par le professeur !");
@@ -346,6 +358,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isAccepterParEleveApresModif()
 				&& !this.isRejeterEleveApresModif() && !this.isRefuserProf()) {
 			this.etat = this.etat | REJETEE_PROF;
+			logger.info("Rejeté par le professeur: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être refusé par le professeur !");
@@ -358,6 +371,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
 				&& !this.isRefuserProf()) {
 			this.etat = this.etat | DUREE_MODIFIEE;
+			logger.info("Durée modifié par le professeur: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être modifié par le professeur !");
@@ -370,6 +384,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
 				&& !this.isRefuserProf()) {
 			this.etat = this.etat | DATE_MODIFIEE;
+			logger.info("Date modifié par le professeur: " + this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être modifié par le professeur !");
@@ -382,6 +397,8 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeterEleveApresModif() && !this.isRejeteeEleve()
 				&& !this.isRefuserProf()) {
 			this.etat = this.etat | AP_MODIFIEE;
+			logger.info("Accompagnement personalisé modifié par le professeur: "
+					+ this.toString());
 		} else {
 			throw new DVCTAPException(
 					"La demande ne peux être modifié par le professeur !");
