@@ -104,7 +104,7 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:if
-						test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+						test="${dctap.rejeterEleveApresModif || dctap.validerProf || dctap.rejeteeEleve}">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -112,13 +112,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.etat == 2}">
+							<c:if test="${dctap.rejeterEleveApresModif}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.etat == 8}">
+							<c:if test="${dctap.rejeteeEleve}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.etat == 64}">
+							<c:if test="${dctap.validerProf}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
@@ -130,7 +130,7 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:if
-						test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+						test="${dctap.rejeterEleveApresModif || dctap.validerProf || dctap.rejeteeEleve}">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -138,13 +138,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.etat == 2}">
+							<c:if test="${dctap.rejeterEleveApresModif}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.etat == 8}">
+							<c:if test="${dctap.vaiderProf}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.etat == 64}">
+							<c:if test="${dctap.rejeteeEleve}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
