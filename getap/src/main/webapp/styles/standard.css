@@ -60,10 +60,10 @@ div#banniere {
 }
 
 div#logolycee {
-	text-align: right;
+	text-align: left;
 	position:relative;
+	margin:-25px 0 0 20px;
 	top:10px;
-	left:8px;
 }
 
 div#content input[type="submit"],
@@ -245,7 +245,7 @@ td .bouton{
 	margin-top:-27px;
 	margin-right:30px;
 	width:340px;
-	height:540px
+	height:584px
 	
 }
 
@@ -289,6 +289,6 @@ td .bouton{
 .menuLogin{
 	text-align: left;
 	position:relative;
-	left:90px;
+	left:40px;
 	bottom:10px;
 }
